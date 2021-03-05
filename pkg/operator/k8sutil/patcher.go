@@ -18,7 +18,7 @@ package k8sutil
 
 import (
 	"context"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -94,13 +94,13 @@ func (p *Patcher) Patch(ctx context.Context, object client.Object) error {
 	}
 
 	var errs []error
-	if !reflect.DeepEqual(p.old, newObj) {
+	if !reflect2.DeepEqual(p.old, newObj) {
 		if err := p.client.Patch(ctx, object, p.objectPatch); err != nil {
 			errs = append(errs, err)
 		}
 	}
 
-	if (p.hasStatus || hasStatus) && !reflect.DeepEqual(p.oldStatus, newStatus) {
+	if (p.hasStatus || hasStatus) && !reflect2.DeepEqual(p.oldStatus, newStatus) {
 		if err := p.client.Status().Patch(ctx, object, p.statusPatch); err != nil {
 			errs = append(errs, err)
 		}
