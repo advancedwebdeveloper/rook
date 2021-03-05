@@ -19,7 +19,7 @@ package nfs
 import (
 	"context"
 	"path"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	nfsv1alpha1 "github.com/rook/rook/pkg/apis/nfs.rook.io/v1alpha1"
@@ -246,7 +246,7 @@ func TestNFSServerReconciler_Reconcile(t *testing.T) {
 				t.Errorf("NFSServerReconciler.Reconcile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("NFSServerReconciler.Reconcile() = %v, want %v", got, tt.want)
 			}
 
@@ -255,7 +255,7 @@ func TestNFSServerReconciler_Reconcile(t *testing.T) {
 				t.Errorf("NFSServerReconciler.Reconcile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(gotServer, expectedServer) {
+			if !reflect2.DeepEqual(gotServer, expectedServer) {
 				t.Errorf("NFSServerReconciler.Reconcile() = %v, want %v", gotServer, expectedServer)
 			}
 
@@ -264,7 +264,7 @@ func TestNFSServerReconciler_Reconcile(t *testing.T) {
 				t.Errorf("NFSServerReconciler.Reconcile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(gotServerService, expectedServerService) {
+			if !reflect2.DeepEqual(gotServerService, expectedServerService) {
 				t.Errorf("NFSServerReconciler.Reconcile() = %v, want %v", gotServerService, expectedServerService)
 			}
 		})
