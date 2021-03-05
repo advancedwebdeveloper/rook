@@ -18,7 +18,7 @@ package controller
 
 import (
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	cephv1 "github.com/rook/rook/pkg/apis/ceph.rook.io/v1"
