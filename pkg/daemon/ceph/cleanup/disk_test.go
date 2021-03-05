@@ -17,7 +17,7 @@ limitations under the License.
 package cleanup
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	cephv1 "github.com/rook/rook/pkg/apis/ceph.rook.io/v1"
@@ -60,7 +60,7 @@ func TestBuildShredArgs(t *testing.T) {
 				clusterInfo:       tt.fields.clusterInfo,
 				sanitizeDisksSpec: tt.fields.sanitizeDisksSpec,
 			}
-			if got := s.buildShredArgs(tt.disk); !reflect.DeepEqual(got, tt.want) {
+			if got := s.buildShredArgs(tt.disk); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("DiskSanitizer.buildShredArgs() = %v, want %v", got, tt.want)
 			}
 		})
