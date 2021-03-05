@@ -17,7 +17,7 @@ limitations under the License.
 package test
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	"k8s.io/api/core/v1"
