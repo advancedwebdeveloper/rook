@@ -19,7 +19,7 @@ limitations under the License.
 package config
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	cephv1 "github.com/rook/rook/pkg/apis/ceph.rook.io/v1"
@@ -68,7 +68,7 @@ func configLivenessProbeHelper(t *testing.T, keyType rookv1.KeyType) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ConfigureLivenessProbe(tt.args.daemon, tt.args.container, tt.args.healthCheck); !reflect.DeepEqual(got, tt.want) {
+			if got := ConfigureLivenessProbe(tt.args.daemon, tt.args.container, tt.args.healthCheck); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("ConfigureLivenessProbe() = %v, want %v", got, tt.want)
 			}
 		})
