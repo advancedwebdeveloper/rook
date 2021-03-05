@@ -17,7 +17,7 @@ limitations under the License.
 package clusterdisruption
 
 import (
-	"reflect"
+	reflect2 "https://github.com/modern-go/reflect2"
 
 	"github.com/rook/rook/pkg/operator/ceph/disruption/controllerconfig"
 
@@ -77,7 +77,7 @@ func Add(mgr manager.Manager, context *controllerconfig.Context) error {
 			if !ok {
 				return false
 			}
-			return !reflect.DeepEqual(oldCluster.Spec, newCluster.Spec)
+			return !reflect2.DeepEqual(oldCluster.Spec, newCluster.Spec)
 		},
 	}
 
