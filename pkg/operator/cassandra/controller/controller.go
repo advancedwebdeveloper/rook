@@ -18,7 +18,7 @@ package controller
 
 import (
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"time"
 
 	"github.com/coreos/pkg/capnslog"
@@ -141,7 +141,7 @@ func New(
 			}
 			// If the Spec is the same as the one in our cache, there aren't
 			// any changes we are interested in.
-			if reflect.DeepEqual(newCluster.Spec, oldCluster.Spec) {
+			if reflect2.DeepEqual(newCluster.Spec, oldCluster.Spec) {
 				return
 			}
 			cc.enqueueCluster(newCluster)
@@ -309,7 +309,7 @@ func (cc *ClusterController) syncHandler(key string) error {
 	// Deepcopy here to ensure nobody messes with the cache.
 	old, new := cluster, cluster.DeepCopy()
 	// If sync was successful and Status has changed, update the Cluster.
-	if err = cc.Sync(new); err == nil && !reflect.DeepEqual(old.Status, new.Status) {
+	if err = cc.Sync(new); err == nil && !reflect2.DeepEqual(old.Status, new.Status) {
 		err = util.PatchClusterStatus(new, cc.rookClient)
 	}
 
