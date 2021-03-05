@@ -20,7 +20,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strings"
 	"time"
 
@@ -151,6 +151,6 @@ var ClusterResource = k8sutil.CustomResource{
 	Plural:     "cephclusters",
 	Group:      cephv1.CustomResourceGroup,
 	Version:    cephv1.Version,
-	Kind:       reflect.TypeOf(cephv1.CephCluster{}).Name(),
+	Kind:       reflect2.TypeOf(cephv1.CephCluster{}).Name(),
 	APIVersion: fmt.Sprintf("%s/%s", cephv1.CustomResourceGroup, cephv1.Version),
 }
