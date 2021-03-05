@@ -18,7 +18,7 @@ limitations under the License.
 package attachment
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 
 	rook "github.com/rook/rook/pkg/apis/rook.io"
 	rookalpha "github.com/rook/rook/pkg/apis/rook.io/v1alpha2"
