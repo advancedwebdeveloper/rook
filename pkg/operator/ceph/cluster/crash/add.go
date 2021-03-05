@@ -17,7 +17,7 @@ limitations under the License.
 package crash
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -78,7 +78,7 @@ func add(mgr manager.Manager, r reconcile.Reconciler) error {
 			if !ok {
 				return false
 			}
-			return !reflect.DeepEqual(nodeOld.Spec, nodeNew.Spec)
+			return !reflect2.DeepEqual(nodeOld.Spec, nodeNew.Spec)
 		},
 	}
 	logger.Debugf("watch for changes to the nodes")
