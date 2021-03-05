@@ -19,7 +19,7 @@ package nfs
 import (
 	"context"
 	"os"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
@@ -176,7 +176,7 @@ func TestProvisioner_Provision(t *testing.T) {
 				t.Errorf("Provisioner.Provision() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("Provisioner.Provision() = %v, want %v", got, tt.want)
 			}
 		})
