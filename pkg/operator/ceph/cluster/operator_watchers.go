@@ -19,7 +19,7 @@ package cluster
 
 import (
 	"os"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 
 	opcontroller "github.com/rook/rook/pkg/operator/ceph/controller"
 	"github.com/rook/rook/pkg/operator/k8sutil"
@@ -33,7 +33,7 @@ func (c *ClusterController) StartOperatorSettingsWatch(stopCh chan struct{}) {
 	k8sutil.StartOperatorSettingsWatch(c.context, operatorNamespace, opcontroller.OperatorSettingConfigMapName,
 		c.operatorConfigChange,
 		func(oldObj, newObj interface{}) {
-			if reflect.DeepEqual(oldObj, newObj) {
+			if reflect2.DeepEqual(oldObj, newObj) {
 				return
 			}
 			c.operatorConfigChange(newObj)
