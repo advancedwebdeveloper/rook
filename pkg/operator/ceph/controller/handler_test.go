@@ -17,7 +17,7 @@ limitations under the License.
 package controller
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	cephv1 "github.com/rook/rook/pkg/apis/ceph.rook.io/v1"
@@ -37,7 +37,7 @@ func TestObjectToCRMapper(t *testing.T) {
 			Namespace: namespace,
 		},
 		TypeMeta: metav1.TypeMeta{
-			Kind: reflect.TypeOf(cephv1.CephFilesystem{}).Name(),
+			Kind: reflect2.TypeOf(cephv1.CephFilesystem{}).Name(),
 		},
 	}
 
