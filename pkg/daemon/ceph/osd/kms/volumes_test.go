@@ -17,7 +17,7 @@ limitations under the License.
 package kms
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	v1 "k8s.io/api/core/v1"
@@ -71,7 +71,7 @@ func TestTLSSecretVolumeAndMount(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := TLSSecretVolumeAndMount(tt.args.config); !reflect.DeepEqual(got, tt.want) {
+			if got := TLSSecretVolumeAndMount(tt.args.config); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("TLSSecretVolumeAndMount() = %v, want %v", got, tt.want)
 			}
 		})
