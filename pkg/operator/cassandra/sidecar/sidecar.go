@@ -22,7 +22,7 @@ import (
 	"net/url"
 	"os"
 	"os/exec"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"time"
 
 	"github.com/coreos/pkg/capnslog"
@@ -146,7 +146,7 @@ func New(
 			if oldService.ResourceVersion == newService.ResourceVersion {
 				return
 			}
-			if reflect.DeepEqual(oldService.Labels, newService.Labels) {
+			if reflect2.DeepEqual(oldService.Labels, newService.Labels) {
 				return
 			}
 			logger.Infof("New event for my MemberService %s", newService.Name)
