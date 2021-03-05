@@ -19,7 +19,7 @@ package osd
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"time"
 
 	"github.com/pkg/errors"
