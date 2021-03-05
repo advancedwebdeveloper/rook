@@ -19,7 +19,7 @@ limitations under the License.
 package externalversions
 
 import (
-	reflect "reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	sync "sync"
 	time "time"
 
@@ -44,19 +44,19 @@ type sharedInformerFactory struct {
 	tweakListOptions internalinterfaces.TweakListOptionsFunc
 	lock             sync.Mutex
 	defaultResync    time.Duration
-	customResync     map[reflect.Type]time.Duration
+	customResync     map[reflect2.Type]time.Duration
 
-	informers map[reflect.Type]cache.SharedIndexInformer
+	informers map[reflect2.Type]cache.SharedIndexInformer
 	// startedInformers is used for tracking which informers have been started.
 	// This allows Start() to be called multiple times safely.
-	startedInformers map[reflect.Type]bool
+	startedInformers map[reflect2.Type]bool
 }
 
 // WithCustomResyncConfig sets a custom resync period for the specified informer types.
 func WithCustomResyncConfig(resyncConfig map[v1.Object]time.Duration) SharedInformerOption {
 	return func(factory *sharedInformerFactory) *sharedInformerFactory {
 		for k, v := range resyncConfig {
-			factory.customResync[reflect.TypeOf(k)] = v
+			factory.customResync[reflect2.TypeOf(k)] = v
 		}
 		return factory
 	}
@@ -97,9 +97,9 @@ func NewSharedInformerFactoryWithOptions(client versioned.Interface, defaultResy
 		client:           client,
 		namespace:        v1.NamespaceAll,
 		defaultResync:    defaultResync,
-		informers:        make(map[reflect.Type]cache.SharedIndexInformer),
-		startedInformers: make(map[reflect.Type]bool),
-		customResync:     make(map[reflect.Type]time.Duration),
+		informers:        make(map[reflect2.Type]cache.SharedIndexInformer),
+		startedInformers: make(map[reflect2.Type]bool),
+		customResync:     make(map[reflect2.Type]time.Duration),
 	}
 
 	// Apply all options
@@ -124,12 +124,12 @@ func (f *sharedInformerFactory) Start(stopCh <-chan struct{}) {
 }
 
 // WaitForCacheSync waits for all started informers' cache were synced.
-func (f *sharedInformerFactory) WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool {
-	informers := func() map[reflect.Type]cache.SharedIndexInformer {
+func (f *sharedInformerFactory) WaitForCacheSync(stopCh <-chan struct{}) map[reflect2.Type]bool {
+	informers := func() map[reflect2.Type]cache.SharedIndexInformer {
 		f.lock.Lock()
 		defer f.lock.Unlock()
 
-		informers := map[reflect.Type]cache.SharedIndexInformer{}
+		informers := map[reflect2.Type]cache.SharedIndexInformer{}
 		for informerType, informer := range f.informers {
 			if f.startedInformers[informerType] {
 				informers[informerType] = informer
@@ -138,7 +138,7 @@ func (f *sharedInformerFactory) WaitForCacheSync(stopCh <-chan struct{}) map[ref
 		return informers
 	}()
 
-	res := map[reflect.Type]bool{}
+	res := map[reflect2.Type]bool{}
 	for informType, informer := range informers {
 		res[informType] = cache.WaitForCacheSync(stopCh, informer.HasSynced)
 	}
@@ -151,7 +151,7 @@ func (f *sharedInformerFactory) InformerFor(obj runtime.Object, newFunc internal
 	f.lock.Lock()
 	defer f.lock.Unlock()
 
-	informerType := reflect.TypeOf(obj)
+	informerType := reflect2.TypeOf(obj)
 	informer, exists := f.informers[informerType]
 	if exists {
 		return informer
@@ -173,7 +173,7 @@ func (f *sharedInformerFactory) InformerFor(obj runtime.Object, newFunc internal
 type SharedInformerFactory interface {
 	internalinterfaces.SharedInformerFactory
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
-	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
+	WaitForCacheSync(stopCh <-chan struct{}) map[reflect2.Type]bool
 
 	Cassandra() cassandrarookio.Interface
 	Ceph() cephrookio.Interface
