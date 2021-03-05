@@ -203,7 +203,7 @@ func (m *OSDHealthMonitor) updateCephStatus(devices []string) {
 		logger.Errorf("failed to retrieve ceph cluster %q to update ceph Storage. %v", m.clusterInfo.NamespacedName().Name, err)
 		return
 	}
-	if !reflect.DeepEqual(cephCluster.Status.CephStorage, &cephClusterStorage) {
+	if !reflect2.DeepEqual(cephCluster.Status.CephStorage, &cephClusterStorage) {
 		cephCluster.Status.CephStorage = &cephClusterStorage
 		if err := opcontroller.UpdateStatus(m.context.Client, cephCluster); err != nil {
 			logger.Errorf("failed to update cluster %q Storage. %v", m.clusterInfo.NamespacedName().Name, err)
