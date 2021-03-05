@@ -17,7 +17,7 @@ limitations under the License.
 package config
 
 import (
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strings"
 	"testing"
 
@@ -140,7 +140,7 @@ func TestMonStore_GetDaemon(t *testing.T) {
 	options, e := monStore.GetDaemon("client.rgw.test.a")
 	assert.NoError(t, e)
 	assert.Contains(t, execedCmd, "ceph config get client.rgw.test.a")
-	assert.True(t, reflect.DeepEqual(options, []Option{{"client.rgw.test.a", "rgw_enable_usage_log", "true"}}))
+	assert.True(t, reflect2.DeepEqual(options, []Option{{"client.rgw.test.a", "rgw_enable_usage_log", "true"}}))
 
 	// json parse exception return as expected
 	execReturn = "bad json output"
