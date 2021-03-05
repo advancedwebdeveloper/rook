@@ -23,7 +23,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strings"
 	"testing"
 
@@ -76,19 +76,19 @@ func TestValidateSpec(t *testing.T) {
 }
 
 func isBasePoolOperation(fsName, command string, args []string) bool {
-	if reflect.DeepEqual(args[0:7], []string{"osd", "pool", "create", fsName + "-metadata", "0", "replicated", fsName + "-metadata"}) {
+	if reflect2.DeepEqual(args[0:7], []string{"osd", "pool", "create", fsName + "-metadata", "0", "replicated", fsName + "-metadata"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-metadata"}) {
+	} else if reflect2.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-metadata"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-metadata", "size", "1"}) {
+	} else if reflect2.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-metadata", "size", "1"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:7], []string{"osd", "pool", "create", fsName + "-data0", "0", "replicated", fsName + "-data0"}) {
+	} else if reflect2.DeepEqual(args[0:7], []string{"osd", "pool", "create", fsName + "-data0", "0", "replicated", fsName + "-data0"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-data0"}) {
+	} else if reflect2.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-data0"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-data0", "size", "1"}) {
+	} else if reflect2.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-data0", "size", "1"}) {
 		return true
-	} else if reflect.DeepEqual(args[0:4], []string{"fs", "add_data_pool", fsName, fsName + "-data0"}) {
+	} else if reflect2.DeepEqual(args[0:4], []string{"fs", "add_data_pool", fsName, fsName + "-data0"}) {
 		return true
 	}
 	return false
@@ -113,7 +113,7 @@ func fsExecutor(t *testing.T, fsName, configDir string, multiFS bool) *exectest.
 					return "[]", nil
 				} else if isBasePoolOperation(fsName, command, args) {
 					return "", nil
-				} else if reflect.DeepEqual(args[0:5], []string{"fs", "new", fsName, fsName + "-metadata", fsName + "-data0"}) {
+				} else if reflect2.DeepEqual(args[0:5], []string{"fs", "new", fsName, fsName + "-metadata", fsName + "-data0"}) {
 					return "", nil
 				} else if contains(args, "auth") && contains(args, "get-or-create-key") {
 					return "{\"key\":\"mysecurekey\"}", nil
@@ -154,7 +154,7 @@ func fsExecutor(t *testing.T, fsName, configDir string, multiFS bool) *exectest.
 				return "[]", nil
 			} else if isBasePoolOperation(fsName, command, args) {
 				return "", nil
-			} else if reflect.DeepEqual(args[0:5], []string{"fs", "new", fsName, fsName + "-metadata", fsName + "-data0"}) {
+			} else if reflect2.DeepEqual(args[0:5], []string{"fs", "new", fsName, fsName + "-metadata", fsName + "-data0"}) {
 				return "", nil
 			} else if contains(args, "auth") && contains(args, "get-or-create-key") {
 				return "{\"key\":\"mysecurekey\"}", nil
@@ -241,19 +241,19 @@ func TestCreateFilesystem(t *testing.T) {
 				return createdFsResponse, nil
 			} else if isBasePoolOperation(fsName, command, args) {
 				return "", nil
-			} else if reflect.DeepEqual(args[0:4], []string{"osd", "pool", "create", fsName + "-data1"}) {
+			} else if reflect2.DeepEqual(args[0:4], []string{"osd", "pool", "create", fsName + "-data1"}) {
 				createDataOnePoolCount++
 				return "", nil
-			} else if reflect.DeepEqual(args[0:4], []string{"fs", "add_data_pool", fsName, fsName + "-data1"}) {
+			} else if reflect2.DeepEqual(args[0:4], []string{"fs", "add_data_pool", fsName, fsName + "-data1"}) {
 				addDataOnePoolCount++
 				return "", nil
 			} else if contains(args, "set") && contains(args, "max_mds") {
 				return "", nil
 			} else if contains(args, "auth") && contains(args, "get-or-create-key") {
 				return "{\"key\":\"mysecurekey\"}", nil
-			} else if reflect.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-data1"}) {
+			} else if reflect2.DeepEqual(args[0:5], []string{"osd", "crush", "rule", "create-replicated", fsName + "-data1"}) {
 				return "", nil
-			} else if reflect.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-data1", "size", "1"}) {
+			} else if reflect2.DeepEqual(args[0:6], []string{"osd", "pool", "set", fsName + "-data1", "size", "1"}) {
 				return "", nil
 			}
 			assert.Fail(t, "Unexpected command")
