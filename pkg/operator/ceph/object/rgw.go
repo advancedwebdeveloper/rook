@@ -20,7 +20,7 @@ package object
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 
 	"github.com/banzaicloud/k8s-objectmatcher/patch"
 	"github.com/pkg/errors"
@@ -312,7 +312,7 @@ func (c *clusterConfig) generateSecretName(id string) string {
 }
 
 func emptyPool(pool cephv1.PoolSpec) bool {
-	return reflect.DeepEqual(pool, cephv1.PoolSpec{})
+	return reflect2.DeepEqual(pool, cephv1.PoolSpec{})
 }
 
 // BuildDomainName build the dns name to reach out the service endpoint
