@@ -23,7 +23,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strconv"
 	"strings"
 	"sync"
