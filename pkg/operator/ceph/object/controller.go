@@ -19,7 +19,7 @@ package object
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strconv"
 	"strings"
 	"syscall"
@@ -65,7 +65,7 @@ var objectsToWatch = []client.Object{
 	&appsv1.Deployment{TypeMeta: metav1.TypeMeta{Kind: "Deployment", APIVersion: appsv1.SchemeGroupVersion.String()}},
 }
 
-var cephObjectStoreKind = reflect.TypeOf(cephv1.CephObjectStore{}).Name()
+var cephObjectStoreKind = reflect2.TypeOf(cephv1.CephObjectStore{}).Name()
 
 // Sets the type meta for the controller main object
 var controllerTypeMeta = metav1.TypeMeta{
