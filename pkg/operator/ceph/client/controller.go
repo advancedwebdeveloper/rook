@@ -20,7 +20,7 @@ package client
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"regexp"
 	"strings"
 
@@ -54,7 +54,7 @@ const (
 
 var logger = capnslog.NewPackageLogger("github.com/rook/rook", controllerName)
 
-var cephClientKind = reflect.TypeOf(cephv1.CephClient{}).Name()
+var cephClientKind = reflect2.TypeOf(cephv1.CephClient{}).Name()
 
 // Sets the type meta for the controller main object
 var controllerTypeMeta = metav1.TypeMeta{
