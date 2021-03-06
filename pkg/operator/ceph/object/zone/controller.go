@@ -20,7 +20,7 @@ package zone
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"syscall"
 	"time"
 
@@ -56,7 +56,7 @@ var waitForRequeueIfObjectZoneGroupNotReady = reconcile.Result{Requeue: true, Re
 
 var logger = capnslog.NewPackageLogger("github.com/rook/rook", controllerName)
 
-var cephObjectZoneKind = reflect.TypeOf(cephv1.CephObjectZone{}).Name()
+var cephObjectZoneKind = reflect2.TypeOf(cephv1.CephObjectZone{}).Name()
 
 // Sets the type meta for the controller main object
 var controllerTypeMeta = metav1.TypeMeta{
