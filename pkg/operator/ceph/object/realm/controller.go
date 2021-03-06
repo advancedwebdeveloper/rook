@@ -21,7 +21,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"syscall"
 	"time"
 
@@ -61,7 +61,7 @@ var waitForRequeueIfRealmNotReady = reconcile.Result{Requeue: true, RequeueAfter
 
 var logger = capnslog.NewPackageLogger("github.com/rook/rook", controllerName)
 
-var cephObjectRealmKind = reflect.TypeOf(cephv1.CephObjectRealm{}).Name()
+var cephObjectRealmKind = reflect2.TypeOf(cephv1.CephObjectRealm{}).Name()
 
 // Sets the type meta for the controller main object
 var controllerTypeMeta = metav1.TypeMeta{
