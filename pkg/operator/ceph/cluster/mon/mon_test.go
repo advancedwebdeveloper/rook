@@ -22,7 +22,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strconv"
 	"strings"
 	"sync"
@@ -515,7 +515,7 @@ func TestStretchMonVolumeClaimTemplate(t *testing.T) {
 			c := &Cluster{
 				spec: tt.fields.spec,
 			}
-			if got := c.monVolumeClaimTemplate(tt.args.mon); !reflect.DeepEqual(got, tt.want) {
+			if got := c.monVolumeClaimTemplate(tt.args.mon); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("Cluster.monVolumeClaimTemplate() = %v, want %v", got, tt.want)
 			}
 		})
