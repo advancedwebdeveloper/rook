@@ -19,7 +19,7 @@ package k8sutil
 
 import (
 	"context"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"testing"
 
 	rookv1 "github.com/rook/rook/pkg/apis/rook.io/v1"
@@ -367,7 +367,7 @@ func TestGenerateNodeAffinity(t *testing.T) {
 				t.Errorf("GenerateNodeAffinity() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("GenerateNodeAffinity() = %v, want %v", got, tt.want)
 			}
 		})
