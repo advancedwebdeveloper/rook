@@ -20,7 +20,7 @@ package pool
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strings"
 
 	"github.com/coreos/pkg/capnslog"
@@ -50,7 +50,7 @@ const (
 
 var logger = capnslog.NewPackageLogger("github.com/rook/rook", controllerName)
 
-var cephBlockPoolKind = reflect.TypeOf(cephv1.CephBlockPool{}).Name()
+var cephBlockPoolKind = reflect2.TypeOf(cephv1.CephBlockPool{}).Name()
 
 // Sets the type meta for the controller main object
 var controllerTypeMeta = metav1.TypeMeta{
