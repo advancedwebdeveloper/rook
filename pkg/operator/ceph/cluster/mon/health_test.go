@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"sync"
 	"testing"
 	"time"
@@ -395,7 +395,7 @@ func TestNewHealthChecker(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewHealthChecker(tt.args.monCluster); !reflect.DeepEqual(got, tt.want) {
+			if got := NewHealthChecker(tt.args.monCluster); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("NewHealthChecker() = %v, want %v", got, tt.want)
 			}
 		})
