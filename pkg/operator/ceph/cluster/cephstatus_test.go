@@ -20,7 +20,7 @@ package cluster
 import (
 	"context"
 	"fmt"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"sort"
 	"testing"
 	"time"
@@ -148,7 +148,7 @@ func TestNewCephStatusChecker(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := newCephStatusChecker(tt.args.context, tt.args.clusterInfo, tt.args.clusterSpec); !reflect.DeepEqual(got, tt.want) {
+			if got := newCephStatusChecker(tt.args.context, tt.args.clusterInfo, tt.args.clusterSpec); !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("newCephStatusChecker() = %v, want %v", got, tt.want)
 			}
 		})
