@@ -3,6 +3,7 @@ module github.com/rook/rook
 go 1.15
 
 require (
+	github.com/modern-go/reflect2 v1.0.1
 	github.com/aws/aws-sdk-go v1.35.24
 	github.com/banzaicloud/k8s-objectmatcher v1.1.0
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f
