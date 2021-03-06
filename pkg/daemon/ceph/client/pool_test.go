@@ -17,7 +17,7 @@ package client
 
 import (
 	"os/exec"
-	"reflect"
+	reflect2 "github.com/modern-go/reflect2"
 	"strconv"
 	"testing"
 
@@ -223,7 +223,7 @@ func TestGetPoolStatistics(t *testing.T) {
 	clusterInfo := AdminClusterInfo("mycluster")
 	stats, err := GetPoolStatistics(context, clusterInfo, "replicapool")
 	assert.Nil(t, err)
-	assert.True(t, reflect.DeepEqual(stats, &p))
+	assert.True(t, reflect2.DeepEqual(stats, &p))
 
 	stats, err = GetPoolStatistics(context, clusterInfo, "rbd")
 	assert.NotNil(t, err)
