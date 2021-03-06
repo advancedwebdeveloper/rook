@@ -1,9 +1,8 @@
 module github.com/rook/rook
 
-go 1.15
+go 1.16
 
 require (
-	github.com/modern-go/reflect2 v1.0.1
 	github.com/aws/aws-sdk-go v1.35.24
 	github.com/banzaicloud/k8s-objectmatcher v1.1.0
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f
@@ -20,6 +19,7 @@ require (
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20210127170128-83a4fdf6edd6
 	github.com/libopenstorage/secrets v0.0.0-20201006135900-af310b01fe47
 	github.com/miekg/dns v1.1.34 // indirect
+	github.com/modern-go/reflect2 v1.0.1
 	github.com/openshift/cluster-api v0.0.0-20191129101638-b09907ac6668
 	github.com/openshift/machine-api-operator v0.2.1-0.20190903202259-474e14e4965a
 	github.com/pkg/errors v0.9.1

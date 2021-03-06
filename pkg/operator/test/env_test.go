@@ -52,7 +52,7 @@ func TestGetEnv(t *testing.T) {
 				return
 			}
 			// Don't care about return value if it reports error
-			if !tt.wantErr && !reflect.DeepEqual(got, tt.want) {
+			if !tt.wantErr && !reflect2.DeepEqual(got, tt.want) {
 				t.Errorf("GetEnv() = %v, want %v", got, tt.want)
 			}
 		})

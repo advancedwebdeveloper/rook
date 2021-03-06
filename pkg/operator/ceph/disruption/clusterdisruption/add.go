@@ -17,7 +17,7 @@ limitations under the License.
 package clusterdisruption
 
 import (
-	reflect2 "https://github.com/modern-go/reflect2"
+	reflect2 "github.com/modern-go/reflect2"
 
 	"github.com/rook/rook/pkg/operator/ceph/disruption/controllerconfig"
 
